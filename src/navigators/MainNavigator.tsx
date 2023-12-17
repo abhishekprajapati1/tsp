@@ -1,14 +1,13 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from '../screens/HomeScreen';
+import BottomTabs from './BottomTabs';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
+
     return (
-        <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen name='Home' component={HomeScreen} />
-        </Stack.Navigator>
+        <BottomTabs />
     )
 }
 

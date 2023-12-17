@@ -1,16 +1,20 @@
 import React, { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import { Text, TextInput, Switch, TouchableOpacity, View, ScrollView } from 'react-native'
 import { styles } from '../styles';
 import useLogin from '../lib/mutations/useLogin';
+import SwitchInput from '../components/SwitchInput';
 
 const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
     const { mutate: login, error }: { mutate: any, data: any, error: any } = useLogin();
     const { control, handleSubmit } = useForm();
 
     const onSubmit = (data: any) => {
-        console.log("see this", data);
-        data.role = "admin";
+        if (data.role) {
+            data.role = 'admin';
+        } else {
+            data.role = 'staff'
+        }
         login(data);
     }
 
@@ -29,6 +33,7 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                     <Controller
                         name='email'
                         control={control}
+                        defaultValue=""
                         render={({ field: { value, onChange } }) => (
                             <TextInput
                                 value={value}
@@ -46,6 +51,7 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                     <Controller
                         name='password'
                         control={control}
+                        defaultValue=""
                         render={({ field: { value, onChange } }) => (
                             <TextInput
                                 value={value}
@@ -57,6 +63,27 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                         )}
                     />
                 </View>
+
+                <Controller
+                    name="role"
+                    control={control}
+                    defaultValue={false}
+                    render={({ field: { value, onChange } }) => (
+                        <SwitchInput
+                            value={value}
+                            onChange={onChange}
+                        />
+                    )}
+                />
+
+
+                {
+                    Boolean(error) && (
+                        <View style={{ marginBottom: 20 }}>
+                            <Text style={{ color: 'red' }}>{error?.response?.data?.message}</Text>
+                        </View>
+                    )
+                }
 
                 <TouchableOpacity
                     onPress={handleSubmit(onSubmit)}
