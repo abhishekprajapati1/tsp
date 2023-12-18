@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Button, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import useAuthStore from '../store/useAuthStore';
 import useUserDetails from '../lib/queries/useUserDetails';
 import { colors, styles as gStyles } from '../styles';

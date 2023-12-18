@@ -37,6 +37,7 @@ const BottomTabs = () => {
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name='truck' color={color} size={size} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen

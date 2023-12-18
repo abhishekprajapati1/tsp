@@ -4,9 +4,10 @@ export const colors = {
     backPrimary: "#6a00ff",
     backLighter: '#cca9fc',
 
-
     forePrimary: "#b8b8b8",
     foreLighter: '#faf8f7',
+
+    lightest: '#fff',
 }
 
 export const styles = StyleSheet.create({
@@ -80,4 +81,16 @@ export const styles = StyleSheet.create({
         color: colors.backPrimary,
         textTransform: "capitalize"
     },
+    headerContainer: {
+        padding: 20,
+        flexDirection: 'row',
+        backgroundColor: colors.backPrimary,
+        alignItems: 'center',
+        justifyContent: "space-between",
+    },
+    headerTitle: {
+        color: colors.lightest,
+        fontWeight: 'bold',
+        fontSize: 18
+    }
 })
