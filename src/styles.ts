@@ -83,6 +83,7 @@ export const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 20,
+        height: 100,
         flexDirection: 'row',
         backgroundColor: colors.backPrimary,
         alignItems: 'center',

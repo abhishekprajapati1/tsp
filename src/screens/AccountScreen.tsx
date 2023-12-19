@@ -7,7 +7,6 @@ import { colors, styles as gStyles } from '../styles';
 import ProfileDetails from '../components/ProfileDetails';
 
 const AccountScreen = () => {
-    // Sample data for the account
     const { data } = useUserDetails();
     const { name, role } = data || {}
     const { title: roleTitle } = role || {}

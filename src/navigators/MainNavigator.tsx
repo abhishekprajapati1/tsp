@@ -1,13 +1,27 @@
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import BottomTabs from './BottomTabs';
+import ManagerTabs from './ManagerTabs';
+import useAuthStore from '../store/useAuthStore';
+import AdminTabs from './AdminTabs';
+import StaffTabs from './StaffTabs';
 
-const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
+    const role: string | null = useAuthStore(state => state.role);
+
+    if (role === "admin") {
+        return (
+            <AdminTabs />
+        )
+    }
+
+    if (role === "manager") {
+        return (
+            <ManagerTabs />
+        )
+    }
 
     return (
-        <BottomTabs />
+        <StaffTabs />
     )
 }
 

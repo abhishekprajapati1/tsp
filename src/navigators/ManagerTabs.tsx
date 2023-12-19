@@ -2,16 +2,27 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AccountScreen from '../screens/AccountScreen';
-import PurchaseScreen from '../screens/PurchaseScreen';
-import SellScreen from '../screens/SellScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SellScreen from '../screens/SellScreen';
+import PurchaseScreen from '../screens/PurchaseScreen';
 
 const Tab = createBottomTabNavigator();
 
-
-const BottomTabs = () => {
+const ManagerTabs = () => {
     return (
-        <Tab.Navigator initialRouteName='Home' backBehavior='order'>
+        <Tab.Navigator
+            screenOptions={{
+                tabBarShowLabel: false,
+                headerStyle: {
+                    height: 100,
+                },
+                tabBarStyle: {
+                    height: 65
+                }
+                // header: (props) => <Header {...props} />
+
+            }}
+        >
             <Tab.Screen
                 name='Home'
                 component={HomeScreen}
@@ -22,11 +33,11 @@ const BottomTabs = () => {
                 }}
             />
             <Tab.Screen
-                name='Team'
-                component={AccountScreen}
+                name='Purchase'
+                component={PurchaseScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name='account-group' color={color} size={size} />
+                        <MaterialCommunityIcons name='shopping' color={color} size={size} />
                     ),
                 }}
             />
@@ -41,16 +52,14 @@ const BottomTabs = () => {
                 }}
             />
             <Tab.Screen
-                name='Purchase'
-                component={PurchaseScreen}
+                name='Team'
+                component={AccountScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name='shopping' color={color} size={size} />
+                        <MaterialCommunityIcons name='account-group' color={color} size={size} />
                     ),
                 }}
             />
-
-
 
             <Tab.Screen
                 name='Account'
@@ -62,8 +71,8 @@ const BottomTabs = () => {
                     headerShown: false
                 }}
             />
-        </Tab.Navigator>
+        </Tab.Navigator >
     )
 }
 
-export default BottomTabs
+export default ManagerTabs
