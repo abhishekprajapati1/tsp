@@ -8,13 +8,17 @@ import { Text } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, useForm } from 'react-hook-form'
 import Picker from 'react-native-picker-select'
+import useItems from '../../lib/queries/useItems'
 
 const SaleForm = () => {
     const setForm = useSaleStore(state => state.setForm);
+    const { data: items, isError } = useItems();
     const { control, handleSubmit } = useForm();
     const onSubmit = (data: any) => {
         console.log("see this data", data)
     }
+
+    console.log('items', items)
 
     return (
         <View>
@@ -117,6 +121,39 @@ const SaleForm = () => {
                                     style={styles.input}
                                     placeholder='Total price here...'
                                     keyboardType='numeric'
+                                />
+                            )
+                        }}
+                    />
+                </View>
+
+
+                <View>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>Payment Method</Text>
+                    <Controller
+                        name='payment_mode'
+                        control={control}
+                        render={({ field: { value, onChange } }) => {
+                            return (
+                                <Picker
+                                    onValueChange={onChange}
+                                    useNativeAndroidPickerStyle={false}
+                                    items={[
+                                        { value: "cash", label: "Cash In Hand" },
+                                        { value: "online", label: "Online (UPI/NETBANKING/E-WALLET)" },
+                                    ]}
+                                    style={{
+                                        inputAndroid: {
+                                            fontSize: 16,
+                                            paddingHorizontal: 10,
+                                            paddingVertical: 10,
+                                            borderWidth: 1,
+                                            borderColor: colors.forePrimary,
+                                            borderRadius: 8,
+                                            color: colors.forePrimary,
+                                            paddingRight: 30 // to ensure the text is never behind the icon
+                                        },
+                                    }}
                                 />
                             )
                         }}
