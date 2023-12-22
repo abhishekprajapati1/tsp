@@ -12,7 +12,6 @@ import LoadingIndicator from '../../components/LoadingIndicator'
 
 const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
     const [total, setTotal] = useState(0);
-    const setForm = useSaleStore(state => state.setForm);
     const { data: items, isLoading, isError } = useItems();
     const { mutate: createSaleRecord } = useCreateSaleRecord({ redirectOnSuccess: () => navigation.navigate("Sales") });
     const { control, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm();

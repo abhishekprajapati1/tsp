@@ -5,15 +5,24 @@ import Button from "../components/Button";
 import { colors } from "../styles";
 import { FC } from "react";
 import CreateSale from "../screens/sale/CreateSale";
+import { View } from 'react-native';
+import useSoldItems from '../lib/queries/useSoldItems';
 
 const SaleStack = createNativeStackNavigator();
 
 
 const AddNewRecord: FC<{ onPress: () => void }> = ({ onPress }) => {
+    const { refetch } = useSoldItems()
+
     return (
-        <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-            <Ionicons name="add" size={30} color={colors.lightest} />
-        </Button>
+        <View style={{ flexDirection: 'row', gap: 20 }}>
+            <Button onPress={() => refetch()} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="refresh-outline" size={24} color={colors.lightest} />
+            </Button>
+            <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="add" size={30} color={colors.lightest} />
+            </Button>
+        </View>
     )
 }
 

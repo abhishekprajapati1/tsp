@@ -6,17 +6,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles";
 import CreatePurchase from "../screens/purchase/CreatePurchase";
 import { View } from "react-native";
-import useRefresh from "../lib/useRefresh";
+import usePurchasedItems from "../lib/queries/usePurchasedItems";
 
 
 const PurchaseTab = createNativeStackNavigator();
 
 const AddNewRecord: FC<{ onPress: () => void }> = ({ onPress }) => {
-    const refresh = useRefresh();
+    const { refetch } = usePurchasedItems();
 
     return (
         <View style={{ flexDirection: 'row', gap: 20 }}>
-            <Button onPress={refresh("purchases")} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+            <Button onPress={() => refetch()} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
                 <Ionicons name="refresh-outline" size={24} color={colors.lightest} />
             </Button>
             <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>

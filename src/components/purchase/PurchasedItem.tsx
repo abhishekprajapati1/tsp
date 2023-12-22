@@ -7,8 +7,6 @@ import Button from '../Button';
 
 const PurchasedItem: FC<{ data: any }> = ({ data }) => {
 
-    console.log("see this", data);
-
 
     return (
         <View style={localStyles.container}>
