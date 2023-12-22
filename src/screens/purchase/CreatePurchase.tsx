@@ -6,52 +6,17 @@ import { colors, styles } from '../../styles'
 import { Text } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import Picker from 'react-native-picker-select'
-import useItems from '../../lib/queries/useItems'
-import useCreateSaleRecord from '../../lib/mutations/useCreateSaleRecord'
+import useCreatePurchaseRecord from '../../lib/mutations/useCreatePurchaseRecord'
 
 const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
-    const [total, setTotal] = useState(0);
-    const { data: items, isLoading, isError } = useItems();
-    const { mutate: createSaleRecord } = useCreateSaleRecord({ redirectOnSuccess: () => navigation.navigate("Sales") });
-    const { control, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm();
-    const quantity = watch("quantity");
-    const item = watch("item_id");
+    const { mutate: createPurchaseRecord, isPending } = useCreatePurchaseRecord({ redirectOnSuccess: () => navigation.navigate("Purchases") });
+    const { control, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = (data: any) => {
-        createSaleRecord(data);
+        delete data.payment_mode;
+        createPurchaseRecord(data);
     }
 
-    useEffect(() => {
-        let id = getValues("item_id");
-        if (id && !isNaN(quantity)) {
-            let itemPrice = items?.find((i: any) => i.id === id)?.price;
-            if (!isNaN(itemPrice)) {
-                const price = itemPrice * quantity;
-                setTotal(price);
-                setValue('total_price', price);
-            } else {
-                setTotal(0);
-            }
-        } else {
-            setTotal(0);
-        }
-    }, [quantity, item]);
-
-
-    if (isLoading) {
-        return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
-        )
-    }
-
-    if (!items || isError) {
-        return (
-            <View>
-                <Text>Error...</Text>
-            </View>
-        )
-    }
 
     return (
         <ScrollView contentContainerStyle={{ padding: 20, gap: 20 }}>
@@ -76,7 +41,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
             <View>
                 <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>Amount :</Text>
                 <Controller
-                    name='name'
+                    name='amount'
                     control={control}
                     render={({ field: { value, onChange } }) => {
                         return (
@@ -84,7 +49,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
                                 value={value}
                                 onChangeText={onChange}
                                 style={styles.input}
-                                placeholder='Enter name here...'
+                                placeholder='How much you bought'
                             />
                         )
                     }}
@@ -149,7 +114,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <Button title='Add Sale Record' onPress={handleSubmit(onSubmit)} />
+            <Button title='Add Purchase Record' disabled={isPending} onPress={handleSubmit(onSubmit)} />
         </ScrollView>
     )
 }

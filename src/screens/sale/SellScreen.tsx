@@ -1,19 +1,16 @@
 import React from 'react'
-import { Text, View, SafeAreaView, StyleSheet, ScrollView } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import useSoldItems from '../../lib/queries/useSoldItems';
 import SoldItemCard from '../../components/sale/SoldItemCard';
 import NoData from '../../components/NoData';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const SellScreen = () => {
-    const insets = useSafeAreaInsets();
-    const { data, isLoading, isError } = useSoldItems();
+    const { data, isLoading, isError, isFetching } = useSoldItems();
 
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <LoadingIndicator />
         )
     }
 

@@ -1,4 +1,3 @@
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PurchaseScreen from "../screens/purchase/PurchaseScreen";
 import { FC } from "react";
@@ -6,15 +5,24 @@ import Button from "../components/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles";
 import CreatePurchase from "../screens/purchase/CreatePurchase";
+import { View } from "react-native";
+import useRefresh from "../lib/useRefresh";
 
 
 const PurchaseTab = createNativeStackNavigator();
 
 const AddNewRecord: FC<{ onPress: () => void }> = ({ onPress }) => {
+    const refresh = useRefresh();
+
     return (
-        <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-            <Ionicons name="add" size={30} color={colors.lightest} />
-        </Button>
+        <View style={{ flexDirection: 'row', gap: 20 }}>
+            <Button onPress={refresh("purchases")} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="refresh-outline" size={24} color={colors.lightest} />
+            </Button>
+            <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="add" size={30} color={colors.lightest} />
+            </Button>
+        </View>
     )
 }
 

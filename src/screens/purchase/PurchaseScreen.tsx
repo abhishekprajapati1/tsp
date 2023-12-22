@@ -1,18 +1,16 @@
 import React from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
-import SoldItemCard from '../../components/sale/SoldItemCard';
 import NoData from '../../components/NoData';
 import usePurchasedItems from '../../lib/queries/usePurchasedItems';
 import PurchasedItem from '../../components/purchase/PurchasedItem';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const PurchaseScreen = () => {
-    const { data, isLoading, isError } = usePurchasedItems();
+    const { data, isLoading, isError, isFetching } = usePurchasedItems();
 
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <LoadingIndicator />
         )
     }
 

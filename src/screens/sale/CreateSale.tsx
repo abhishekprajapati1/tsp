@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form'
 import Picker from 'react-native-picker-select'
 import useItems from '../../lib/queries/useItems'
 import useCreateSaleRecord from '../../lib/mutations/useCreateSaleRecord'
+import LoadingIndicator from '../../components/LoadingIndicator'
 
 const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
     const [total, setTotal] = useState(0);
@@ -40,9 +41,7 @@ const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
 
     if (isLoading) {
         return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <LoadingIndicator />
         )
     }
 

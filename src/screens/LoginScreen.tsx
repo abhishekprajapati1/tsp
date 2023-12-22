@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Text, TextInput, Switch, TouchableOpacity, View, ScrollView } from 'react-native'
+import { Text, TextInput, View, ScrollView } from 'react-native'
 import { styles } from '../styles';
 import useLogin from '../lib/mutations/useLogin';
 import SwitchInput from '../components/SwitchInput';
