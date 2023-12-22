@@ -3,17 +3,17 @@ import api from "../api";
 import useAuthStore from "../../store/useAuthStore";
 
 
-const useSoldItems = () => {
+const usePurchasedItems = () => {
     const token = useAuthStore(state => state.token);
 
     const user = useQuery({
-        queryKey: ["sales"],
+        queryKey: ["purchases"],
         queryFn: async () => {
-            const res = await api.get("sales", { headers: { 'Authorization': token } });
+            const res = await api.get("purchases", { headers: { 'Authorization': token } });
             return res.data?.data;
         }
     });
     return user;
 }
 
-export default useSoldItems;
+export default usePurchasedItems;

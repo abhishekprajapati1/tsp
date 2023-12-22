@@ -14,8 +14,6 @@ const useUserDetails = () => {
             if (res?.data?.data) {
                 let { role } = res.data.data;
                 let roleTitle = typeof role === 'string' ? role : role?.title;
-
-                console.log("see this", roleTitle)
                 setRole(roleTitle)
             }
             return res.data?.data;

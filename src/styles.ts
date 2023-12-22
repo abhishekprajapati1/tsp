@@ -5,6 +5,7 @@ export const colors = {
     backLighter: '#cca9fc',
 
     forePrimary: "#b8b8b8",
+    foreSecondary: "#dedede",
     foreLighter: '#faf8f7',
 
     lightest: '#fff',
@@ -47,10 +48,9 @@ export const styles = StyleSheet.create({
     inputGroup: {
         display: 'flex',
         flexDirection: "column",
-        gap: 10,
     },
     inputLabel: {
-        color: colors.forePrimary
+        color: colors.forePrimary,
     },
     input: {
         height: 50,
@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.forePrimary,
         borderRadius: 10,
-        marginBottom: 10,
+        marginTop: 10
     },
     loginSwitch: {
         display: 'flex',
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 20,
-        height: 100,
+        height: 70,
         flexDirection: 'row',
         backgroundColor: colors.backPrimary,
         alignItems: 'center',
@@ -93,5 +93,10 @@ export const styles = StyleSheet.create({
         color: colors.lightest,
         fontWeight: 'bold',
         fontSize: 18
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 12,
+        marginBottom: 10,
     }
 })

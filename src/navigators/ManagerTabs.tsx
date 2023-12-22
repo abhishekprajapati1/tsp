@@ -3,8 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AccountScreen from '../screens/AccountScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import SellScreen from '../screens/SellScreen';
-import PurchaseScreen from '../screens/PurchaseScreen';
+import SellScreen from '../screens/sale/SellScreen';
+import PurchaseScreen from '../screens/purchase/PurchaseScreen';
+import TeamScreen from '../screens/TeamScreen';
+import { Text, View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,11 +55,12 @@ const ManagerTabs = () => {
             />
             <Tab.Screen
                 name='Team'
-                component={AccountScreen}
+                component={TeamScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name='account-group' color={color} size={size} />
                     ),
+                    headerTitle: "Team management",
                 }}
             />
 

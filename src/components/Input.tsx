@@ -1,8 +1,9 @@
 import React from 'react'
+import { View } from 'react-native'
 
 const Input = () => {
     return (
-        <div>Input</div>
+        <View></View>
     )
 }
 

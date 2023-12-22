@@ -4,10 +4,11 @@ import { Text, TextInput, Switch, TouchableOpacity, View, ScrollView } from 'rea
 import { styles } from '../styles';
 import useLogin from '../lib/mutations/useLogin';
 import SwitchInput from '../components/SwitchInput';
+import Button from '../components/Button';
 
 const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
-    const { mutate: login, error }: { mutate: any, data: any, error: any } = useLogin();
-    const { control, handleSubmit } = useForm();
+    const { mutate: login, error, isPending } = useLogin();
+    const { control, handleSubmit, formState: { errors } } = useForm({ mode: "all" });
 
     const onSubmit = (data: any) => {
         if (data.role) {
@@ -38,11 +39,23 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                             <TextInput
                                 value={value}
                                 onChangeText={onChange}
-                                style={styles.input}
+                                style={{ ...styles.input, ...(errors.email && { borderColor: 'red' }) }}
                                 placeholder='Enter your email id here...'
                             />
                         )}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: "Email is required."
+                            },
+                            pattern: {
+                                value:
+                                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                                message: "Invalid email format",
+                            },
+                        }}
                     />
+                    {errors.email && <Text style={styles.errorText}>{errors.email.message?.toString()}</Text>}
                 </View>
 
 
@@ -57,11 +70,30 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                                 value={value}
                                 onChangeText={onChange}
                                 secureTextEntry
-                                style={styles.input}
+                                style={{ ...styles.input, ...(errors.password && { borderColor: 'red' }) }}
                                 placeholder='Enter your password...'
                             />
                         )}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: "Please create a password"
+                            },
+                            minLength: {
+                                value: 8,
+                                message: "Password must be at least 8 characters long"
+                            },
+                            maxLength: {
+                                value: 20,
+                                message: "Password length cannot exceed 20 characters"
+                            },
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
+                                message: "Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character from @, $, !, %, *, ?, &,."
+                            }
+                        }}
                     />
+                    {errors.password && <Text style={styles.errorText}>{errors.password.message?.toString()}</Text>}
                 </View>
 
                 <Controller
@@ -85,14 +117,7 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                     )
                 }
 
-                <TouchableOpacity
-                    onPress={handleSubmit(onSubmit)}
-                    style={styles.primaryBtn}
-                >
-                    <Text style={styles.primaryBtnText}>
-                        Login
-                    </Text>
-                </TouchableOpacity>
+                <Button title='Login' onPress={handleSubmit(onSubmit)} disabled={isPending} />
             </ScrollView>
         </View>
     )

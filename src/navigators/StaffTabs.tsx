@@ -1,16 +1,14 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
 import AccountScreen from '../screens/AccountScreen';
-import PurchaseScreen from '../screens/PurchaseScreen';
-import SellScreen from '../screens/SellScreen';
+import PurchaseScreen from '../screens/purchase/PurchaseScreen';
+import SellScreen from '../screens/sale/SellScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import useAuthStore from '../store/useAuthStore';
-import ManageScreen from '../screens/ManageScreen';
+import SaleStackNavigator from './SaleStackNavigator';
+import { colors } from '../styles';
+import PurchaseStackNavigator from './PurchaseStackNavigator';
 
 const Tab = createBottomTabNavigator();
-
-const homeOwners = ["manager", "admin"];
 
 const StaffTabs = () => {
 
@@ -18,37 +16,25 @@ const StaffTabs = () => {
     return (
         <Tab.Navigator initialRouteName='Home' backBehavior='order'>
             <Tab.Screen
-                name='Home'
-                component={HomeScreen}
-                options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name='home' color={color} size={size} />
-                    ),
-                }}
-            />
-
-
-            <Tab.Screen
                 name='Sell'
-                component={SellScreen}
+                component={SaleStackNavigator}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name='truck' color={color} size={size} />
                     ),
-                    headerShown: false,
+                    headerShown: false
                 }}
             />
             <Tab.Screen
                 name='Purchase'
-                component={PurchaseScreen}
+                component={PurchaseStackNavigator}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name='shopping' color={color} size={size} />
                     ),
+                    headerShown: false
                 }}
             />
-
-
 
             <Tab.Screen
                 name='Account'

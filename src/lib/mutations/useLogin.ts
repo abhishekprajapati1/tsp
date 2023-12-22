@@ -11,7 +11,6 @@ const useLogin = () => {
             return res.data;
         },
         onSuccess: data => {
-            console.log("see this", data);
             if (data?.token) {
                 AsyncStorage.setItem("auth_token", data.token);
                 setToken(data?.token);

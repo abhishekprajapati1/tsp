@@ -5,8 +5,6 @@ import { colors } from '../styles'
 
 const Header: FC<BottomTabHeaderProps> = ({ navigation, options }) => {
     const Title = options.headerTitle?.toString();
-    console.log(Title);
-
 
     return (
         <View style={localStyles.container}>

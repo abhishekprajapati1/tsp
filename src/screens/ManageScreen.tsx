@@ -12,8 +12,6 @@ const ManageScreen = () => {
     const insets = useSafeAreaInsets();
     const { data } = useSoldItems();
 
-    console.log(data);
-
 
     return (
         <SafeAreaView style={{ ...insets }}>
