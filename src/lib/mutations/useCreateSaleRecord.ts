@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import api from "../api";
+import api, { RequestError } from "../api";
 import useAuthStore from "../../store/useAuthStore";
 
 const useCreateSaleRecord = ({ redirectOnSuccess }: { redirectOnSuccess: () => void }) => {
@@ -14,8 +14,8 @@ const useCreateSaleRecord = ({ redirectOnSuccess }: { redirectOnSuccess: () => v
             await queryClient.invalidateQueries({ queryKey: ["sales"] });
             redirectOnSuccess();
         },
-        onError: error => {
-            console.log("see error", error);
+        onError: (error: RequestError) => {
+            console.log("see error", error?.response?.data?.message);
         }
     });
     return mutate;

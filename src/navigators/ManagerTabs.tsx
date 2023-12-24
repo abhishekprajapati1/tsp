@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/dashboard/HomeScreen';
 import AccountScreen from '../screens/account/AccountScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SellScreen from '../screens/sale/SellScreen';
 import PurchaseScreen from '../screens/purchase/PurchaseScreen';
-import TeamScreen from '../screens/TeamScreen';
+import TeamScreen from '../screens/team/TeamScreen';
 import { Text, View } from 'react-native';
 
 const Tab = createBottomTabNavigator();

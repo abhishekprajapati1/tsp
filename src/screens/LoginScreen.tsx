@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, TextInput, View, ScrollView } from 'react-native'
-import { styles } from '../styles';
+import { colors, styles } from '../styles';
 import useLogin from '../lib/mutations/useLogin';
 import SwitchInput from '../components/SwitchInput';
 import Button from '../components/Button';
@@ -23,11 +23,14 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
     return (
         <View style={styles.authContainer}>
 
-            <Text style={{ marginTop: "10%", fontSize: 50, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>TSP</Text>
+            <View style={styles.brandNameContainer}>
+                <Text style={{ width: '100%', color: colors.lightest, fontWeight: '700', fontSize: 20 }}>The</Text>
+                <Text style={styles.brandName}>Shawarma Point</Text>
+            </View>
 
             <ScrollView style={styles.authForm}>
 
-                <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center', marginBottom: 50 }}>Login</Text>
+                <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center', marginBottom: 50, color: colors.backPrimary }}>Login</Text>
 
                 <View style={styles.inputGroup}>
                     <Text>Mobile no.:</Text>
@@ -117,7 +120,7 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                     )
                 }
 
-                <Button title='Login' onPress={handleSubmit(onSubmit)} disabled={isPending} />
+                <Button title='Login' onPress={handleSubmit(onSubmit)} disabled={isPending} isRequesting={isPending} />
             </ScrollView>
         </View>
     )

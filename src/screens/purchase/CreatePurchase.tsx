@@ -112,7 +112,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <Button title='Add Purchase Record' disabled={isPending} onPress={handleSubmit(onSubmit)} />
+            <Button title='Add Purchase Record' disabled={isPending} isRequesting={isPending} onPress={handleSubmit(onSubmit)} />
         </ScrollView>
     )
 }

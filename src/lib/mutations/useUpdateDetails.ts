@@ -17,7 +17,7 @@ const useUpdateDetails = ({ redirectOnSuccess }: { redirectOnSuccess: () => void
             return res.data;
         },
         onSuccess: async data => {
-            await queryClient.invalidateQueries({ queryKey: ["auth/details"] })
+            await queryClient.invalidateQueries({ queryKey: ["auth/user"] })
             if (redirectOnSuccess) redirectOnSuccess();
         },
         onError: (error: RequestError) => {

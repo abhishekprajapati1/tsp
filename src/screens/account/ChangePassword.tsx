@@ -75,7 +75,7 @@ const ChangePassword: FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <Button title='Update Password' disabled={isPending} onPress={handleSubmit(onSubmit)} />
+            <Button title='Update Password' disabled={isPending} isRequesting={isPending} onPress={handleSubmit(onSubmit)} />
         </ScrollView>
     )
 }

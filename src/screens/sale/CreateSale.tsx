@@ -13,7 +13,7 @@ import LoadingIndicator from '../../components/LoadingIndicator'
 const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
     const [total, setTotal] = useState(0);
     const { data: items, isLoading, isError } = useItems();
-    const { mutate: createSaleRecord } = useCreateSaleRecord({ redirectOnSuccess: () => navigation.navigate("Sales") });
+    const { mutate: createSaleRecord, isPending } = useCreateSaleRecord({ redirectOnSuccess: () => navigation.navigate("Sales") });
     const { control, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm();
     const quantity = watch("quantity");
     const item = watch("item_id");
@@ -167,6 +167,7 @@ const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
                     render={({ field: { value, onChange } }) => {
                         return (
                             <Picker
+                                value={value}
                                 onValueChange={onChange}
                                 useNativeAndroidPickerStyle={false}
                                 items={[
@@ -191,7 +192,7 @@ const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <Button title='Add Sale Record' onPress={handleSubmit(onSubmit)} />
+            <Button title='Add Sale Record' disabled={isPending} isRequesting={isPending} onPress={handleSubmit(onSubmit)} />
         </ScrollView>
     )
 }

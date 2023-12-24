@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-    backPrimary: "#6a00ff",
-    backLighter: '#cca9fc',
+    backPrimary: "#ba2171",
+    backLighter: '#ffdbed',
 
     forePrimary: "#b8b8b8",
     foreSecondary: "#dedede",
@@ -29,16 +29,11 @@ export const styles = StyleSheet.create({
     authContainer: {
         backgroundColor: colors.backPrimary,
         height: "100%",
-        position: "relative",
     },
     authForm: {
+        flexGrow: 1,
         backgroundColor: "#fff",
         padding: 50,
-        height: "70%",
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         display: 'flex',
@@ -98,5 +93,17 @@ export const styles = StyleSheet.create({
         color: 'red',
         fontSize: 12,
         marginBottom: 10,
+    },
+    brandNameContainer: {
+        height: 270,
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    brandName: {
+        fontSize: 40,
+        width: '100%',
+        fontWeight: 'bold',
+        color: 'white'
     }
 })

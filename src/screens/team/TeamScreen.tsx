@@ -1,12 +1,12 @@
-import React from 'react'
-import { Text, View, StyleSheet, ScrollView } from 'react-native'
-import useSoldItems from '../../lib/queries/useSoldItems';
-import SoldItemCard from '../../components/sale/SoldItemCard';
+import React from 'react';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import NoData from '../../components/NoData';
+import useStaffs from '../../lib/queries/useStaffs';
+import UserCard from '../../components/teams/UserCard';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
-const SellScreen = () => {
-    const { data, isLoading, isError, isFetching } = useSoldItems();
+const TeamScreen = () => {
+    const { data, isLoading, isError, isFetching } = useStaffs();
 
     if (isLoading || isFetching) {
         return (
@@ -14,14 +14,13 @@ const SellScreen = () => {
         )
     }
 
-    if (isError || !data) {
+    if (isError) {
         return (
             <View>
                 <Text>Error...</Text>
             </View>
         )
     }
-
 
     return (
         <View>
@@ -31,7 +30,7 @@ const SellScreen = () => {
                         {
                             data.map(d => {
                                 return (
-                                    <SoldItemCard key={d.id} data={d} />
+                                    <UserCard key={d.id} data={d} />
                                 )
                             })
                         }
@@ -40,7 +39,7 @@ const SellScreen = () => {
             }
 
             {
-                Array.isArray(data) && data.length < 1 && <NoData notFoundText='No sale record found.' />
+                Array.isArray(data) && data.length < 1 && <NoData notFoundText='Create new team members.' />
             }
 
         </View>
@@ -57,4 +56,4 @@ const localStyles = StyleSheet.create({
 });
 
 
-export default SellScreen
+export default TeamScreen;

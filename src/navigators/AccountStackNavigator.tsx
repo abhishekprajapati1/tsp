@@ -1,22 +1,29 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import Button from "../components/Button";
 import { colors } from "../styles";
 import React, { FC } from "react";
-import CreateSale from "../screens/sale/CreateSale";
 import { View } from 'react-native';
 import AccountScreen from '../screens/account/AccountScreen';
 import EditProfile from '../screens/account/EditProfile';
 import ChangePassword from '../screens/account/ChangePassword';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAuthStore from '../store/useAuthStore';
 
 const AccountStack = createNativeStackNavigator();
 
 
-const EditProfileButton: FC<{ onPress: () => void }> = ({ onPress }) => {
+const RightHeader: FC<{ onPress: () => void }> = ({ onPress }) => {
+    const setToken = useAuthStore(store => store.setToken);
+    const logout = () => {
+        AsyncStorage.removeItem("auth_token");
+        setToken("");
+    }
+
     return (
         <View style={{ flexDirection: 'row', gap: 20 }}>
-            <Button onPress={onPress} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-                <MaterialCommunityIcons name="account-edit-outline" size={30} color={colors.lightest} />
+            <Button onPress={() => logout()} style={{ width: 30, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                <AntDesign name="logout" size={18} color={colors.lightest} />
             </Button>
         </View>
     )
@@ -34,7 +41,7 @@ const AccountStackNavigator: FC<{ navigation: any }> = ({ navigation }) => {
             headerTintColor: colors.lightest
         }}>
             <AccountStack.Screen name="Profile" component={AccountScreen} options={{
-                headerRight: () => <EditProfileButton onPress={onAddClick} />
+                headerRight: () => <RightHeader onPress={onAddClick} />
             }} />
 
             <AccountStack.Screen name="EditProfile" component={EditProfile} options={{

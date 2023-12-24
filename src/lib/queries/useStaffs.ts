@@ -3,17 +3,17 @@ import api from "../api";
 import useAuthStore from "../../store/useAuthStore";
 
 
-const useSoldItems = () => {
+const useStaffs = () => {
     const token = useAuthStore(state => state.token);
 
     const user = useQuery({
-        queryKey: ["sales"],
+        queryKey: ["teams/staffs"],
         queryFn: async () => {
-            const res = await api.get("sales", { headers: { 'Authorization': token } });
+            const res = await api.get("users", { headers: { 'Authorization': token } });
             return res.data?.data;
         }
     });
     return user;
 }
 
-export default useSoldItems;
+export default useStaffs;

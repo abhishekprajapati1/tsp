@@ -1,19 +1,37 @@
 import React, { FC, ReactNode } from 'react'
-import { styles } from '../styles'
-import { TouchableOpacity } from 'react-native'
+import { colors, styles } from '../styles'
+import { ActivityIndicator, TextStyle, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 import { Text } from 'react-native'
+import LoadingIndicator from './LoadingIndicator'
 
-const Button: FC<{ onPress?: any, title?: string, style?: any, titleStyle?: any, children?: ReactNode, disabled?: boolean }> = ({ children, disabled, onPress, title = "Submit", style = styles.primaryBtn, titleStyle = styles.primaryBtnText }) => {
+export type ButtonProps = TouchableOpacityProps & {
+    title?: string;
+    titleStyle?: TextStyle,
+    isRequesting?: boolean;
+}
+
+
+const Button: FC<ButtonProps> = ({ children, isRequesting, title = "Submit", style = styles.primaryBtn, titleStyle = styles.primaryBtnText, ...rest }) => {
     return (
         <TouchableOpacity
-            onPress={onPress}
             style={style}
-            disabled={disabled}
+            {...rest}
         >
-            {children ? children : (
-                <Text style={titleStyle}>
-                    {title}
-                </Text>
+            {
+                isRequesting && (
+                    <ActivityIndicator color={colors.lightest} />
+                )
+            }
+            {!isRequesting && (
+                <>
+                    {
+                        children ? children : (
+                            <Text style={titleStyle}>
+                                {title}
+                            </Text>
+                        )
+                    }
+                </>
             )}
         </TouchableOpacity>
     )

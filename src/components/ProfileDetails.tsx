@@ -1,20 +1,14 @@
 import React, { FC } from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import useUserDetails from '../lib/queries/useUserDetails';
-import { colors, styles } from '../styles';
-import useAuthStore from '../store/useAuthStore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colors } from '../styles';
 import Button from './Button';
 
 const ProfileDetails: FC<{ navigation: any }> = ({ navigation }) => {
-    const setToken = useAuthStore(state => state.setToken);
     const { data } = useUserDetails();
     const { name, email, phone } = data || {}
 
-    const logout = () => {
-        AsyncStorage.removeItem("auth_token");
-        setToken("");
-    }
+    
 
 
     return (
@@ -36,8 +30,8 @@ const ProfileDetails: FC<{ navigation: any }> = ({ navigation }) => {
             )}
 
             <View style={{ flexDirection: 'row', gap: 10, marginTop: 40 }}>
-                <Button title='Logout' onPress={logout} titleStyle={{ color: colors.lightest, width: '100%', textAlign: 'center', justifyContent: 'center' }} style={{ width: '40%', backgroundColor: colors.backPrimary, alignItems: 'center', justifyContent: 'center', height: 50, borderRadius: 5 }} />
-                <Button title='Change Password' onPress={() => navigation.navigate("ChangePassword")} titleStyle={{ color: colors.backPrimary, width: '100%', textAlign: 'center', justifyContent: 'center' }} style={{ width: '60%', backgroundColor: colors.backLighter, alignItems: 'center', justifyContent: 'center', height: 50, borderRadius: 5 }} />
+                <Button title='Change Password' onPress={() => navigation.navigate("ChangePassword")} titleStyle={{ color: colors.backPrimary, width: '100%', textAlign: 'center', justifyContent: 'center' }} style={{ width: '55%', backgroundColor: colors.backLighter, alignItems: 'center', justifyContent: 'center', height: 50, borderRadius: 5 }} />
+                <Button title='Edit Profile' onPress={() => navigation.navigate("EditProfile")} titleStyle={{ color: colors.lightest, width: '100%', textAlign: 'center', justifyContent: 'center' }} style={{ width: '45%', backgroundColor: colors.backPrimary, alignItems: 'center', justifyContent: 'center', height: 50, borderRadius: 5 }} />
             </View>
         </ScrollView>
     )
@@ -45,9 +39,9 @@ const ProfileDetails: FC<{ navigation: any }> = ({ navigation }) => {
 
 const pdStyles = StyleSheet.create({
     container: {
-        paddingLeft: 50,
-        paddingRight: 50,
-        paddingTop: 30,
+        paddingLeft: 20,
+        paddingRight: 30,
+        paddingTop: 20,
         gap: 20,
     },
     detailContainer: {
@@ -59,10 +53,10 @@ const pdStyles = StyleSheet.create({
     detailTitle: {
         fontWeight: 'bold',
         flex: 1,
-        fontSize: 18
+        fontSize: 16
     },
     detailText: {
-        fontSize: 18,
+        fontSize: 14,
         color: colors.forePrimary
     }
 })

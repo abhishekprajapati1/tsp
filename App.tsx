@@ -1,3 +1,4 @@
+import React from 'react';
 import AppNavigator from './src/navigators/AppNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

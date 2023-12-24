@@ -3,31 +3,35 @@ import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import useUserDetails from '../../lib/queries/useUserDetails';
 import { colors, styles as gStyles } from '../../styles';
 import ProfileDetails from '../../components/ProfileDetails';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const AccountScreen: FC<{ navigation: any }> = ({ navigation }) => {
-    const { data } = useUserDetails();
+    const { data, isLoading } = useUserDetails();
     const { name, role } = data || {}
     const { title: roleTitle } = role || {}
+    const isRequesting = isLoading;
+
+    if (isRequesting) {
+        return <LoadingIndicator />
+    }
 
     return (
-        <SafeAreaView>
-            <View style={{ gap: 10 }}>
-                <View style={styles.container}>
-                    <View style={styles.profileContainer}>
-                        <View style={styles.circle}>
-                            <Text style={styles.circleText}>{name?.[0]}</Text>
-                        </View>
-                    </View>
-
-                    <Text style={styles.userName}>{name}</Text>
-                    <View style={gStyles.badge}>
-                        <Text style={gStyles.badgeText}>{roleTitle || role}</Text>
+        <View style={{ gap: 10 }}>
+            <View style={styles.container}>
+                <View style={styles.profileContainer}>
+                    <View style={styles.circle}>
+                        <Text style={styles.circleText}>{name?.[0]}</Text>
                     </View>
                 </View>
 
-                <ProfileDetails navigation={navigation} />
+                <Text style={styles.userName}>{name}</Text>
+                <View style={gStyles.badge}>
+                    <Text style={gStyles.badgeText}>{roleTitle || role}</Text>
+                </View>
             </View>
-        </SafeAreaView>
+
+            <ProfileDetails navigation={navigation} />
+        </View>
     );
 };
 
@@ -37,7 +41,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 30,
+        paddingTop: 40,
+        paddingBottom: 40,
         backgroundColor: colors.backPrimary
     },
     profileContainer: {

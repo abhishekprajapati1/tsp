@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import useUserDetails from '../lib/queries/useUserDetails';
+import useUserDetails from '../../lib/queries/useUserDetails';
+import { colors } from '../../styles';
 
 
 const HomeScreen: FC<{ navigation: any }> = ({ navigation }) => {
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 8,
         fontWeight: 'bold',
-        color: '#007bff', // or any color you prefer
+        color: colors.backPrimary, // or any color you prefer
     },
 });
 

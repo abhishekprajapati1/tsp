@@ -31,7 +31,7 @@ const EditProfile: FC<{ navigation: any }> = ({ navigation }) => {
     }
 
     if (isError || !data) {
-        return <NoData />
+        return <NoData notFoundText='Something went wrong...' />
     }
 
     return (
@@ -74,7 +74,7 @@ const EditProfile: FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <Button title='Save changes' disabled={isPending} onPress={handleSubmit(onSubmit)} />
+            <Button title='Save changes' disabled={isPending} isRequesting={isPending} onPress={handleSubmit(onSubmit)} />
         </ScrollView>
     )
 }

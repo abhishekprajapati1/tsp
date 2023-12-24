@@ -17,12 +17,15 @@ const PurchasedItem: FC<{ data: any }> = ({ data }) => {
                 </Button>
             </View>
             <View style={{ gap: 5 }}>
+                <View>
+                    <Text style={{ color: colors.forePrimary }} >{data.quantity}</Text>
+                </View>
                 <View style={{ flexDirection: 'row', gap: 10, flexGrow: 1 }}>
-                    <Text style={{ color: colors.forePrimary }}>Payment method: </Text>
+                    <Text style={{ color: colors.foreSecondary }}>Payment method: </Text>
                     <Text style={{ color: "lime" }}>{data.payment_mode}</Text>
                 </View>
                 <View style={localStyles.flexBetween}>
-                    <Text style={{ color: colors.forePrimary }}>{dayjs().format("YYYY-MM-DD") === dayjs(data.date).format("YYYY-MM-DD") ? "Today     " + dayjs(data.date).format("hh:mm a") : dayjs(data.date).format("MMM DD, YYYY        hh:mm a")}</Text>
+                    <Text style={{ color: colors.foreSecondary }}>{dayjs().format("YYYY-MM-DD") === dayjs(data.date).format("YYYY-MM-DD") ? "Today     " + dayjs(data.date).format("hh:mm a") : dayjs(data.date).format("MMM DD, YYYY        hh:mm a")}</Text>
                     <Text style={{ color: colors.backPrimary, fontWeight: 'bold', fontSize: 16, flexGrow: 1, textAlign: 'right' }}>Rs. {data.price}</Text>
                 </View>
             </View>
@@ -45,11 +48,11 @@ const localStyles = StyleSheet.create({
     },
     container: {
         backgroundColor: colors.lightest,
-        height: 120,
+        height: 130,
         padding: 10,
         borderRadius: 6,
         justifyContent: 'space-between',
-        gap: 5,
+        gap: 15,
         elevation: 3, // for Android shadow
         shadowOffset: { width: 0, height: 2 }, // for iOS shadow
         shadowOpacity: 0.2, // for iOS shadow
