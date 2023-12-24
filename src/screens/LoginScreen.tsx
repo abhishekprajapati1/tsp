@@ -14,7 +14,7 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
         if (data.role) {
             data.role = 'admin';
         } else {
-            data.role = 'staff'
+            data.role = 'staff';
         }
         login(data);
     }
@@ -30,9 +30,9 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                 <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center', marginBottom: 50 }}>Login</Text>
 
                 <View style={styles.inputGroup}>
-                    <Text>Email Id:</Text>
+                    <Text>Mobile no.:</Text>
                     <Controller
-                        name='email'
+                        name='phone'
                         control={control}
                         defaultValue=""
                         render={({ field: { value, onChange } }) => (
@@ -40,22 +40,22 @@ const LoginScreen: FC<{ navigation: any }> = ({ navigation }) => {
                                 value={value}
                                 onChangeText={onChange}
                                 style={{ ...styles.input, ...(errors.email && { borderColor: 'red' }) }}
-                                placeholder='Enter your email id here...'
+                                placeholder='Mobile no. here...'
+                                keyboardType="phone-pad"
                             />
                         )}
                         rules={{
                             required: {
                                 value: true,
-                                message: "Email is required."
+                                message: "Phone number is required."
                             },
                             pattern: {
-                                value:
-                                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                                message: "Invalid email format",
+                                value: /^[0-9]{10}$/,
+                                message: "Invalid mobile number.",
                             },
                         }}
                     />
-                    {errors.email && <Text style={styles.errorText}>{errors.email.message?.toString()}</Text>}
+                    {errors.phone && <Text style={styles.errorText}>{errors.phone.message?.toString()}</Text>}
                 </View>
 
 

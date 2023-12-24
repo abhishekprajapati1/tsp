@@ -1,12 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
-import useAuthStore from '../store/useAuthStore';
-import useUserDetails from '../lib/queries/useUserDetails';
-import { colors, styles as gStyles } from '../styles';
-import ProfileDetails from '../components/ProfileDetails';
+import useUserDetails from '../../lib/queries/useUserDetails';
+import { colors, styles as gStyles } from '../../styles';
+import ProfileDetails from '../../components/ProfileDetails';
 
-const AccountScreen = () => {
+const AccountScreen: FC<{ navigation: any }> = ({ navigation }) => {
     const { data } = useUserDetails();
     const { name, role } = data || {}
     const { title: roleTitle } = role || {}
@@ -15,21 +13,19 @@ const AccountScreen = () => {
         <SafeAreaView>
             <View style={{ gap: 10 }}>
                 <View style={styles.container}>
-                    {/* Rectangular area with a gray circle and letter */}
                     <View style={styles.profileContainer}>
                         <View style={styles.circle}>
                             <Text style={styles.circleText}>{name?.[0]}</Text>
                         </View>
                     </View>
 
-                    {/* Sample name below the circle */}
                     <Text style={styles.userName}>{name}</Text>
                     <View style={gStyles.badge}>
                         <Text style={gStyles.badgeText}>{roleTitle || role}</Text>
                     </View>
                 </View>
 
-                <ProfileDetails />
+                <ProfileDetails navigation={navigation} />
             </View>
         </SafeAreaView>
     );
@@ -41,12 +37,12 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50,
+        padding: 30,
         backgroundColor: colors.backPrimary
     },
     profileContainer: {
         width: '100%', // Full width of the device
-        height: screenHeight * 0.17, // Set to less than one-third of the device height
+        height: screenHeight * 0.13, // Set to less than one-third of the device height
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -72,6 +68,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
     },
+
 });
 
 export default AccountScreen;

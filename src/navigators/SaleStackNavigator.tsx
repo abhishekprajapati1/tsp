@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import SellScreen from "../screens/sale/SellScreen";
 import Button from "../components/Button";
 import { colors } from "../styles";
-import { FC } from "react";
+import React, { FC } from "react";
 import CreateSale from "../screens/sale/CreateSale";
 import { View } from 'react-native';
 import useSoldItems from '../lib/queries/useSoldItems';

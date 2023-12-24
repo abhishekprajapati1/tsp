@@ -1,17 +1,15 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AccountScreen from '../screens/AccountScreen';
-import PurchaseScreen from '../screens/purchase/PurchaseScreen';
-import SellScreen from '../screens/sale/SellScreen';
+import AccountScreen from '../screens/account/AccountScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SaleStackNavigator from './SaleStackNavigator';
-import { colors } from '../styles';
 import PurchaseStackNavigator from './PurchaseStackNavigator';
+import useAuthStore from '../store/useAuthStore';
+import AccountStackNavigator from './AccountStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
 const StaffTabs = () => {
-
 
     return (
         <Tab.Navigator initialRouteName='Home' backBehavior='order'>
@@ -38,7 +36,7 @@ const StaffTabs = () => {
 
             <Tab.Screen
                 name='Account'
-                component={AccountScreen}
+                component={AccountStackNavigator}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name='account' color={color} size={size} />

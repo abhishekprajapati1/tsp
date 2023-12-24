@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import AccountScreen from '../screens/AccountScreen';
+import AccountScreen from '../screens/account/AccountScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SellScreen from '../screens/sale/SellScreen';
 import PurchaseScreen from '../screens/purchase/PurchaseScreen';

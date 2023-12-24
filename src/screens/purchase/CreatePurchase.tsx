@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { ScrollView, TextInput, View } from 'react-native'
 import Button from '../../components/Button'
-import useSaleStore from '../../store/useSaleStore'
 import { colors, styles } from '../../styles'
 import { Text } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
@@ -13,7 +12,6 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
     const { control, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data: any) => {
-        delete data.payment_mode;
         createPurchaseRecord(data);
     }
 
@@ -41,7 +39,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
             <View>
                 <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>Amount :</Text>
                 <Controller
-                    name='amount'
+                    name='quantity'
                     control={control}
                     render={({ field: { value, onChange } }) => {
                         return (
@@ -66,7 +64,7 @@ const CreatePurchase: FC<{ navigation: any }> = ({ navigation }) => {
                             <TextInput
                                 value={value}
                                 onChangeText={onChange}
-                                keyboardType='numeric'
+                                keyboardType="numeric"
                                 style={styles.input}
                                 placeholder='Enter name here...'
                             />

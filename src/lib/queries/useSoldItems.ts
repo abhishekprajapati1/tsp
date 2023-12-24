@@ -9,6 +9,7 @@ const useSoldItems = () => {
     const user = useQuery({
         queryKey: ["sales"],
         queryFn: async () => {
+            console.log("see this");
             const res = await api.get("sales", { headers: { 'Authorization': token } });
             return res.data?.data;
         }

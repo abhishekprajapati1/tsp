@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PurchaseScreen from "../screens/purchase/PurchaseScreen";
-import { FC } from "react";
+import React, { FC } from "react";
 import Button from "../components/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles";

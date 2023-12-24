@@ -18,7 +18,7 @@ const SoldItemCard: FC<{ data: any }> = ({ data }) => {
             <View style={{ gap: 5 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                     <Text style={{ color: colors.forePrimary }}>Payment Method :</Text>
-                    <Text style={{ color: '#00bd32' }}>{data.payment_mode}</Text>
+                    <Text style={{ color: 'lime' }}>{data.payment_mode}</Text>
                 </View>
                 <View style={localStyles.flexBetween}>
                     <Text style={{ color: colors.forePrimary }}>{dayjs().format("YYYY-MM-DD") === dayjs(data.date).format("YYYY-MM-DD") ? "Today     " + dayjs(data.date).format("hh:mm a") : dayjs(data.date).format("MMM DD, YYYY        hh:mm a")}</Text>
@@ -44,7 +44,7 @@ const localStyles = StyleSheet.create({
     },
     container: {
         backgroundColor: colors.lightest,
-        height: 100,
+        height: 110,
         padding: 10,
         borderRadius: 6,
         justifyContent: 'space-between',

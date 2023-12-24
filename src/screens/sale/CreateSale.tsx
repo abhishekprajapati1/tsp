@@ -133,7 +133,7 @@ const CreateSale: FC<{ navigation: any }> = ({ navigation }) => {
                     render={({ field: { value, onChange } }) => {
                         return (
                             <TextInput
-                                value={value}
+                                value={String(value)}
                                 onChangeText={text => {
                                     const numericValue = parseFloat(text);
                                     if (numericValue === 0) {
